@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Nishat - My Forever Love</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Playfair Display & Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Canvas Confetti for celebrations -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: radial-gradient(circle at center, #2b091e 0%, #11030c 100%);
+            color: #fce7f3;
+            overflow-x: hidden;
+        }
+        .serif-font {
+            font-family: 'Playfair Display', serif;
+        }
+        .glow-text {
+            text-shadow: 0 0 15px rgba(244, 114, 182, 0.7), 0 0 30px rgba(236, 72, 153, 0.4);
+        }
+        .glow-box {
+            box-shadow: 0 0 30px rgba(244, 114, 182, 0.2), inset 0 0 15px rgba(244, 114, 182, 0.1);
+        }
+        .hearts-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .heart {
+            position: absolute;
+            bottom: -50px;
+            color: rgba(244, 114, 182, 0.6);
+            animation: floatUp linear infinite;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg) scale(0.6); opacity: 0; }
+            20% { opacity: 0.8; }
+            100% { transform: translateY(-105vh) rotate(360deg) scale(1.2); opacity: 0; }
+        }
+        .glass-card {
+            background: rgba(45, 15, 38, 0.5);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(244, 114, 182, 0.2);
+        }
+        @keyframes soft-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        .animate-soft-pulse {
+            animation: soft-pulse 3s ease-in-out infinite;
+        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #11030c; }
+        ::-webkit-scrollbar-thumb { background: #db2777; border-radius: 4px; }
+    </style>
+</head>
+<body class="relative min-h-screen flex flex-col justify-between selection:bg-pink-500 selection:text-white">
+
+    <div class="hearts-container" id="heartsContainer"></div>
+
+    <header class="w-full py-6 px-6 z-10 flex justify-between items-center max-w-6xl mx-auto">
+        <div class="flex items-center space-x-3">
+            <span class="text-pink-400 text-2xl animate-bounce"><i class="fa-solid fa-heart"></i></span>
+            <span class="serif-font text-xl md:text-2xl font-bold tracking-wider text-pink-200">For Nishat</span>
+        </div>
+        <button onclick="playMusicToggle()" id="musicToggleBtn" class="glass-card px-4 py-2 rounded-full text-xs md:text-sm font-medium text-pink-300 hover:bg-pink-900/40 transition flex items-center space-x-2 border border-pink-500/30">
+            <i class="fa-solid fa-music" id="musicIcon"></i>
+            <span id="musicText">Play Melody</span>
+        </button>
+    </header>
+
+    <main class="flex-grow flex flex-col items-center justify-center px-4 sm:px-6 z-10 max-w-4xl mx-auto w-full my-8">
+        
+        <div class="text-center mb-12">
+            <div class="inline-block mb-4 px-4 py-1.5 rounded-full glass-card border border-pink-500/30 text-pink-300 text-xs md:text-sm tracking-widest uppercase animate-soft-pulse">
+                <i class="fa-solid fa-sparkles mr-2"></i>A Special Universe Just For You
+            </div>
+            <h1 class="serif-font text-4xl sm:text-6xl md:text-7xl font-bold mb-6 glow-text bg-gradient-to-r from-pink-300 via-pink-400 to-rose-300 bg-clip-text text-transparent">
+                Nishat, My Love
+            </h1>
+            <p class="text-pink-200/80 text-base sm:text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed">
+                Every beat of my heart whispers your name. Welcome to a tiny digital piece of the infinite universe you hold in my soul. ✨
+            </p>
+        </div>
+
+        <div class="w-full glass-card rounded-3xl p-6 sm:p-10 mb-12 glow-box relative overflow-hidden transition-all duration-500 hover:border-pink-400/50">
+            <div class="absolute -top-10 -right-10 text-pink-500/10 text-9xl pointer-events-none">
+                <i class="fa-solid fa-quote-right"></i>
+            </div>
+            <div class="text-center">
+                <h3 class="serif-font text-xl sm:text-2xl text-pink-300 mb-4 font-semibold">
+                    <i class="fa-solid fa-feather-pointed mr-2 text-pink-400"></i>Today's Melody for You
+                </h3>
+                <div id="poemDisplay" class="serif-font italic text-lg sm:text-2xl text-pink-100 min-h-[90px] flex items-center justify-center transition-opacity duration-500 px-4">
+                    "In a world full of temporary things, you are my forever, my calm, and my greatest adventure."
+                </div>
+                <button onclick="nextPoem()" class="mt-6 px-6 py-2.5 rounded-full bg-gradient-to-r from-pink-600 to-rose-600 text-white font-medium shadow-lg shadow-pink-600/30 hover:opacity-90 transition transform active:scale-95 text-sm sm:text-base flex items-center justify-center mx-auto space-x-2">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    <span>Discover Another Reason</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="w-full mb-12">
+            <div class="text-center mb-8">
+                <h2 class="serif-font text-3xl sm:text-4xl font-bold text-pink-200 mb-2">Why You Mean Everything</h2>
+                <p class="text-pink-300/70 text-sm">Click each card to uncover a special piece of my heart</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div onclick="flipCard(this)" class="glass-card rounded-2xl p-6 cursor-pointer transform transition duration-300 hover:-translate-y-2 hover:border-pink-400 group relative min-h-[180px] flex flex-col justify-between">
+                    <div class="flex justify-between items-start">
+                        <span class="text-2xl text-pink-400 group-hover:scale-110 transition"><i class="fa-solid fa-face-smile-beam"></i></span>
+                        <span class="text-xs text-pink-400/60 font-mono">01 / 06</span>
+                    </div>
+                    <div>
+                        <h4 class="serif-font text-lg font-bold text-pink-200 mb-1">Your Radiant Smile</h4>
+                        <p class="text-pink-300/80 text-sm card-text">The way your smile lights up even my darkest days is absolute magic.</p>
+                    </div>
+                    <div class="text-xs text-pink-400/50 mt-4 flex items-center">
+                        <i class="fa-solid fa-hand-pointer mr-1 animate-pulse"></i> Tap for sweet thought
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div onclick="flipCard(this)" class="glass-card rounded-2xl p-6 cursor-pointer transform transition duration-300 hover:-translate-y-2 hover:border-pink-400 group relative min-h-[180px] flex flex-col justify-between">
+                    <div class="flex justify-between items-start">
+                        <span class="text-2xl text-pink-400 group-hover:scale-110 transition"><i class="fa-solid fa-shield-heart"></i></span>
+                        <span class="text-xs text-pink-400/60 font-mono">02 / 06</span>
+                    </div>
+                    <div>
+                        <h4 class="serif-font text-lg font-bold text-pink-200 mb-1">My Safe Haven</h4>
+                        <p class="text-pink-300/80 text-sm card-text">With you, I found home. No matter where we are, my heart rests in your arms.</p>
+                    </div>
+                    <div class="text-xs text-pink-400/50 mt-4 flex items-center">
+                        <i class="fa-solid fa-hand-pointer mr-1 animate-pulse"></i> Tap for sweet thought
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div onclick="flipCard(this)" class="glass-card rounded-2xl p-6 cursor-pointer transform transition duration-300 hover:-translate-y-2 hover:border-pink-400 group relative min-h-[180px] flex flex-col justify-between">
+                    <div class="flex justify-between items-start">
+                        <span class="text-2xl text-pink-400 group-hover:scale-110 transition"><i class="fa-solid fa-comments"></i></span>
+                        <span class="text-xs text-pink-400/60 font-mono">03 / 06</span>
+                    </div>
+                    <div>
+                        <h4 class="serif-font text-lg font-bold text-pink-200 mb-1">Endless Conversations</h4>
+                        <p class="text-pink-300/80 text-sm card-text">Hours feel like seconds when I talk to you. You are my favorite person to chat with.</p>
+                    </div>
+                    <div class="text-xs text-pink-400/50 mt-4 flex items-center">
+                        <i class="fa-solid fa-hand-pointer mr-1 animate-pulse"></i> Tap for sweet thought
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div onclick="flipCard(this)" class="glass-card rounded-2xl p-6 cursor-pointer transform transition duration-300 hover:-translate-y-2 hover:border-pink-400 group relative min-h-[180px] flex flex-col justify-between">
+                    <div class="flex justify-between items-start">
+                        <span class="text-2xl text-pink-400 group-hover:scale-110 transition"><i class="fa-solid fa-star"></i></span>
+                        <span class="text-xs text-pink-400/60 font-mono">04 / 06</span>
+                    </div>
+                    <div>
+                        <h4 class="serif-font text-lg font-bold text-pink-200 mb-1">Pure Kindness</h4>
+                        <p class="text-pink-300/80 text-sm card-text">Your golden heart and gentle soul inspire me to become a better version of myself every single day.</p>
+                    </div>
+                    <div class="text-xs text-pink-400/50 mt-4 flex items-center">
+                        <i class="fa-solid fa-hand-pointer mr-1 animate-pulse"></i> Tap for sweet thought
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div onclick="flipCard(this)" class="glass-card rounded-2xl p-6 cursor-pointer transform transition duration-300 hover:-translate-y-2 hover:border-pink-400 group relative min-h-[180px] flex flex-col justify-between">
+                    <div class="flex justify-between items-start">
+                        <span class="text-2xl text-pink-400 group-hover:scale-110 transition"><i class="fa-solid fa-mug-hot"></i></span>
+                        <span class="text-xs text-pink-400/60 font-mono">05 / 06</span>
+                    </div>
+                    <div>
+                        <h4 class="serif-font text-lg font-bold text-pink-200 mb-1">Little Daily Joys</h4>
+                        <p class="text-pink-300/80 text-sm card-text">Every random text, every shared laugh, and every moment with you turns ordinary days into treasures.</p>
+                    </div>
+                    <div class="text-xs text-pink-400/50 mt-4 flex items-center">
+                        <i class="fa-solid fa-hand-pointer mr-1 animate-pulse"></i> Tap for sweet thought
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div onclick="flipCard(this)" class="glass-card rounded-2xl p-6 cursor-pointer transform transition duration-300 hover:-translate-y-2 hover:border-pink-400 group relative min-h-[180px] flex flex-col justify-between">
+                    <div class="flex justify-between items-start">
+                        <span class="text-2xl text-pink-400 group-hover:scale-110 transition"><i class="fa-solid fa-infinity"></i></span>
+                        <span class="text-xs text-pink-400/60 font-mono">06 / 06</span>
+                    </div>
+                    <div>
+                        <h4 class="serif-font text-lg font-bold text-pink-200 mb-1">Forever & Always</h4>
+                        <p class="text-pink-300/80 text-sm card-text">If I had a thousand lives, I would search for you in every single one of them, Nishat.</p>
+                    </div>
+                    <div class="text-xs text-pink-400/50 mt-4 flex items-center">
+                        <i class="fa-solid fa-hand-pointer mr-1 animate-pulse"></i> Tap for sweet thought
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="w-full text-center glass-card rounded-3xl p-8 sm:p-12 glow-box border border-pink-500/30 relative">
+            <h3 class="serif-font text-2xl sm:text-3xl font-bold text-pink-200 mb-4">Have a Question For You...</h3>
+            <p class="text-pink-300/80 mb-8 max-w-lg mx-auto text-sm sm:text-base">
+                Do you know how deeply, truly, and unconditionally loved you are today and every single day?
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <button onclick="triggerCelebration()" class="px-8 py-3 rounded-full bg-gradient-to-r from-pink-500 via-rose-500 to-red-500 text-white font-bold text-lg shadow-xl shadow-pink-500/30 hover:scale-105 transition transform active:scale-95">
+                    <i class="fa-solid fa-heart mr-2"></i> Yes, Completely! ❤️
+                </button>
+                <button id="runawayBtn" onmouseover="moveButton()" onclick="moveButton()" class="px-8 py-3 rounded-full glass-card border border-pink-400/50 text-pink-200 font-medium text-lg hover:bg-pink-900/30 transition">
+                    Maybe a Little? 😉
+                </button>
+            </div>
+            
+            <div id="surpriseMsg" class="hidden mt-6 p-4 rounded-2xl bg-pink-950/60 border border-pink-500/40 text-pink-200 animate-fade-in">
+                <p class="serif-font text-xl font-bold text-pink-300">🎉 Yay! I love you endlessly, Nishat! ❤️</p>
+                <p class="text-sm text-pink-300/80 mt-1">You are my greatest blessing and absolute favorite human.</p>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="w-full py-6 text-center text-pink-300/60 text-xs sm:text-sm z-10 border-t border-pink-900/40">
+        <p>Made with infinite love and magic exclusively for <span class="text-pink-400 font-semibold">Nishat</span> 💖</p>
+    </footer>
+
+    <script>
+        // Floating hearts generator
+        function createHeart() {
+            const container = document.getElementById('heartsContainer');
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            
+            const icons = ['fa-heart', 'fa-solid fa-heart', 'fa-solid fa-sparkles', 'fa-solid fa-star'];
+            const randomIcon = icons[Math.floor(Math.random() * icons.length)];
+            heart.innerHTML = <i class="${randomIcon}"></i>;
+            
+            const startLeft = Math.random() * 100;
+            const size = Math.random() * 1.5 + 0.8;
+            const duration = Math.random() * 6 + 5;
+            const opacity = Math.random() * 0.7 + 0.3;
+
+            heart.style.left = ${startLeft}%;
+            heart.style.fontSize = ${size}rem;
+            heart.style.animationDuration = ${duration}s;
+            heart.style.opacity = opacity;
+
+            container.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, duration * 1000);
+        }
+
+        setInterval(createHeart, 400);
+
+        const quotes = [
+            "\"In a world full of temporary things, you are my forever, my calm, and my greatest adventure.\"",
+            "\"Nishat, your voice is my favorite sound, and your smile is my favorite sight in the whole universe.\"",
+            "\"If I had a flower for every time I thought of you, I could walk in my garden forever.\"",
+            "\"You are the poem I never knew how to write, and this life is the story I've always wanted to tell with you.\"",
+            "\"No measure of time with you will ever be enough, but let's start with forever.\"",
+            "\"Your happiness is my happiness, and holding your hand is my favorite place to be.\""
+        ];
+        let currentQuoteIndex = 0;
+
+        function nextPoem() {
+            const display = document.getElementById('poemDisplay');
+            display.style.opacity = 0;
+            setTimeout(() => {
+                currentQuoteIndex = (currentQuoteIndex + 1) % quotes.length;
+                display.innerText = quotes[currentQuoteIndex];
+                display.style.opacity = 1;
+            }, 300);
+        }
+
+        const extraThoughts = [
+            "Your laugh is my absolute favorite sound in the world.",
+            "Every single dream of mine includes you in it.",
+            "You make ordinary days feel like absolute magic.",
+            "I fall in love with your beautiful heart more every single day.",
+            "You are my peace in the middle of chaos.",
+            "Thank you for being the wonderful, precious soul you are."
+        ];
+
+        function flipCard(card) {
+            card.classList.add('scale-105', 'border-pink-400', 'bg-pink-900/40');
+            setTimeout(() => {
+                card.classList.remove('scale-105');
+            }, 300);
+            
+            const textElement = card.querySelector('.card-text');
+            const originalText = textElement.getAttribute('data-original') || textElement.innerText;
+            
+            if (!textElement.getAttribute('data-original')) {
+                textElement.setAttribute('data-original', originalText);
+            }
+
+            const randomThought = extraThoughts[Math.floor(Math.random() * extraThoughts.length)];
+            textElement.innerText = 💫 "${randomThought}";
+            
+            setTimeout(() => {
+                textElement.innerText = originalText;
+            }, 4000);
+        }
+
+        function triggerCelebration() {
+            document.getElementById('surpriseMsg').classList.remove('hidden');
+            
+            confetti({
+                particleCount: 120,
+                spread: 80,
+                origin: { y: 0.6 },
+                colors: ['#ec4899', '#f472b6', '#fda4af', '#ffffff']
+            });
+        }
+
+        function moveButton() {
+            const btn = document.getElementById('runawayBtn');
+            const x = (Math.random() - 0.5) * 160;
+            const y = (Math.random() - 0.5) * 80;
+            btn.style.transform = translate(${x}px, ${y}px);
+        }
+
+        let audioCtx = null;
+        let isPlaying = false;
+        let intervalId = null;
+
+        function playMusicToggle() {
+            const btnText = document.getElementById('musicText');
+            const icon = document.getElementById('musicIcon');
+
+            if (!isPlaying) {
+                try {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                    playLullabyNote();
+                    intervalId = setInterval(playLullabyNote, 3200);
+                    isPlaying = true;
+                    btnText.innerText = "Stop Melody";
+                    icon.className = "fa-solid fa-volume-high text-pink-400 animate-pulse";
+                } catch(e) {
+                    console.log("Audio context blocked");
+                }
+            } else {
+                if (intervalId) clearInterval(intervalId);
+                if (audioCtx) audioCtx.close();
+                isPlaying = false;
+                btnText.innerText = "Play Melody";
+                icon.className = "fa-solid fa-music";
+            }
+        }
+
+        function playLullabyNote() {
+            if (!audioCtx || !isPlaying) return;
+            const notes = [523.25, 659.25, 783.99, 880.00, 1046.50];
+            const note = notes[Math.floor(Math.random() * notes.length)];
+            
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(note, audioCtx.currentTime);
+            
+            gain.gain.setValueAtTime(0, audioCtx.currentTime);
+            gain.gain.linearRampToValueAtTime(0.08, audioCtx.currentTime + 0.5);
+            gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 3.0);
+            
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            
+            osc.start();
+            osc.stop(audioCtx.currentTime + 3.1);
+        }
+    </script>
+</body>
+</html>
